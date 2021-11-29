@@ -10,8 +10,6 @@ console.log(estilosBody)
 // console.log(ps)
 // console.log(paragrafos)
 
-
-
 for (let c in estilosBody) {
     if (c == 'backgroundColor') {
         console.log(c, estilosBody[c])
