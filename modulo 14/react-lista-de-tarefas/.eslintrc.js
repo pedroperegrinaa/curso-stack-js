@@ -1,3 +1,4 @@
+/* eslint-disable eol-last */
 /* eslint-disable indent */
 module.exports = {
     env: {
@@ -27,5 +28,6 @@ module.exports = {
         'no-console': 'off',
         'no-useless-return': 'off',
         'import/no-duplicates': 'off',
+        'react/forbid-prop-types': 'off',
     },
 };

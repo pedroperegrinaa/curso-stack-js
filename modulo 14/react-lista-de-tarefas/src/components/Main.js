@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
+
+import Form from './Form';
+import Tarefas from './Tarefas';
 import './Main.css';
-
-// Form
-import { FaPlus } from 'react-icons/fa';
-
-// Tarefas
-import { FaEdit, FaWindowClose } from 'react-icons/fa';
 
 export default class Main extends Component {
   state = {
@@ -13,6 +10,24 @@ export default class Main extends Component {
     tarefas: [],
     index: -1,
   };
+
+  componentDidMount() {
+    const tarefas = JSON.parse(localStorage.getItem('tarefas'));
+
+    if (!tarefas) return;
+
+    this.setState({
+      tarefas,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { tarefas } = this.state;
+  if (tarefas === prevState.tarefas) return;
+
+  console.log('as tarefas mudaram');
+  localStorage.setItem('tarefas', JSON.stringify(tarefas));
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -81,27 +96,17 @@ this.setState({
               Lista de Tarefas
             </h1>
 
-            <form onSubmit={this.handleSubmit} action="#" className="form">
-              <input type="text" onChange={this.handleChange} value={novaTarefa} />
-              <button type="submit">
+            <Form
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+              novaTarefa={novaTarefa}
+            />
 
-                <FaPlus />
-              </button>
-            </form>
-
-            <ul className="tarefas">
-              {tarefas.map((tarefa, index) => (
-                <li key={tarefa}>
-                  {tarefa}
-                  <span>
-                    <FaEdit className="edit" onClick={(e) => { this.handleEdit(e, index); }} />
-                    <FaWindowClose className="delete" onClick={(e) => { this.handleDelete(e, index); }} />
-                  </span>
-
-                </li>
-              ))}
-            </ul>
-
+            <Tarefas
+              handleEdit={this.handleEdit}
+              handleDelete={this.handleDelete}
+              tarefas={tarefas}
+            />
           </div>
         );
     }
