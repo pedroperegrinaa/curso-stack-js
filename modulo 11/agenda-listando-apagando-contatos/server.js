@@ -59,7 +59,7 @@ app.set('view engine', 'ejs'); // define a engine de renderização do express
 /* --------------------------------------------------------------------------------------------------------  */
 
 app.on('pronto', () => { // depois de receber o emit(), a aplicação começa a ouvir na porta selecionada
-    app.listen(3000, function() {
+    app.listen(3001, function() {
         console.log('Servidor online')
     })
 })
